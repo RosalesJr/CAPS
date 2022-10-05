@@ -4,21 +4,30 @@
 
 ## Problem Domain
 
+## Phase 1
+
 A build of an application for a product called CAPS - The Code Academy Parcel Service. In this sprint, we’ll build out a system that emulates a real world supply chain. CAPS will simulate a delivery service where vendors (such a flower shops) will ship products using our delivery service and when our drivers deliver them, each vendor will be notified that their customers received what they purchased. This will be an event driven application that “distributes” the responsibility for logging to separate modules, using only events to trigger logging based on activity.
+
+## Phase 2
+
+Continue working on a multi-day build of our delivery tracking system, creating an event observable over a network with Socket.io.In this phase, we’ll be moving away from using Node Events for managing a pool of events, instead refactoring to using the Socket.io libraries. This allows communication between Server and Client applications.
+The intent here is to build the data services that would drive a suite of applications where we can see pickups and deliveries in real-time.
 
 ## Dependencies
 
 * JEST
 * CHANCE
+* SOCKET.IO
+* SOCKET.IO-CLIENT
 
 ### Setup
 
 * npm init
 * create basic application foundation
-* npm i jest, chance
+* npm i jest, chance, socket.io, socket.io-client
 
 ### UML
 
-![Lab 4 UML](./img/lab11-uml.png)
-
-Created UML with Taylor Main
+Created UML for lab 11 with Taylor Main
+![Lab 11 UML](./img/lab11-uml.png)
+![lab 12 UML](./img/uml-lab12.png)
