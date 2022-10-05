@@ -3,5 +3,8 @@
 let eventPool = require('../eventPool');
 
 module.exports = (payload) => {
-  console.log(`thank you for ordering with us ${payload.order.name}`);
+    setTimeout(() => {
+        eventPool.emit('ARRIVED', payload);
+        console.log(`thank you for ordering with us ${payload.order.name}`);
+    }, 2000);
 };
