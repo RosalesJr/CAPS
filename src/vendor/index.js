@@ -1,17 +1,15 @@
 'use strict';
 
-const { io } = require('socket.io-client');
-
-const socket = io('http://localhost:3002/caps');
+const MessageClient = require('../lib/messageClient');
+const acmeVendor = new MessageClient('Acme Widgets');
+const flowerVendor = new MessageClient('1-800-Flowers');
 const Chance = require('chance');
-
 const chance = new Chance();
 
-socket.emit('JOIN', 'caps');
-
-socket.on('connect', () => {
-  console.log(socket.id);
-
+acmeVendor.subscribe('DELIVERED', payload => {
+    console.log('received message', payload.order.orderId);
+    acmeVendor.publish('RECEIVED', payload);
+});
 
   setInterval(() => {
     const payload = {
@@ -22,6 +20,23 @@ socket.on('connect', () => {
     };
 
     console.log('----new order----');
-    socket.emit('PICKUP', {order: payload});
+    acmeVendor.publish('PICKUP', {order: payload});
   }, 8000);
+// });
+
+flowerVendor.subscribe('DELIVERED', payload => {
+    console.log('received message', payload.order.orderId);
+    flowerVendor.publish('RECEIVED', payload);
 });
+
+setInterval(() => {
+    const payload = {
+      store: chance.company(),
+      orderId: chance.guid({version: 5}),
+      name: chance.name(),
+      address: chance.address(),
+    };
+
+    console.log('----new order----');
+    flowerVendor.publish('PICKUP', {order: payload});
+  }, 8000);
