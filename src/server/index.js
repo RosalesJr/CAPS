@@ -31,7 +31,7 @@ caps.on('connection', (socket) => {
       currentQueue = messageQueue.read(queueKey);
     }
     currentQueue.store(payload.messageId, payload);
-    caps.emit('PICKUP', payload);
+    socket.broadcast.emit('PICKUP', payload);
   });
 
   socket.on('DELIVERED', (payload) => {
